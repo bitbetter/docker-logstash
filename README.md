@@ -1,4 +1,4 @@
-# Elasticsearch on docker
+# Logstash on docker
 
 ## Features
 
