@@ -10,13 +10,13 @@ RUN apt-get -qy install logstash=1.4.2-1-2c0f5a1
 # Add config
 ADD logstash.agent.conf /etc/logstash/conf.d/agent.conf
 
-# Install supervisor
-RUN apt-get -y install supervisor
-ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+# Install monit
+RUN apt-get -y install monit
+ADD logstash.monit.conf /etc/monit/conf.d/logstash.monit.conf
 
 # Expose logstash listening port
 EXPOSE 4560
 
 # Run supervisor
 WORKDIR /tmp
-CMD ["/usr/bin/supervisord", "--configuration=/etc/supervisor/conf.d/supervisord.conf"]
+CMD ["/usr/bin/monit", "-d 10", "-I"]
